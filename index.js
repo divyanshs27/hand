@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var MongoClient = require("mongodb").MongoClient;
 var ObjectID = require("mongodb").ObjectID;
 const dbname = "handwriting_recog";
-const url ="mongodb+srv://divyansh:divyansh11@cluster0-0qwqv.mongodb.net/test?retryWrites=true";
+const url ="mongodb://localhost:27017/handwriting_recog";
 const mongoOptions = { useNewUrlParser : true};
 
 const app = express();
@@ -27,9 +27,9 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname+"/REGISTER.html");
 });
 app.get('/',(req,res)=>{
-    res.render("about",{});
+    res.render("index",{});
 });
- app.post('/about',(req,res)=>{
+ app.post('/about.html',(req,res)=>{
      
  MongoClient.connect(url,(err,db)=>{
         if(err)
