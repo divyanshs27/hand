@@ -3,23 +3,23 @@ const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const dbname = "page";
-const url = "mongodb+srv://divyansh:divyansh27@cluster0-gd3lq.mongodb.net/h4t";
+const url = "mongodb+srv://divyansh:divyansh27@cluster0-tsqj7.mongodb.net/test";
 const mongoOptions = {useNewUrlParser : true};
 
 const app = express();
 
-let ejs = require('ejs')
+//let ejs = require('ejs')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname));    // this cmd allows external css files to be used
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 app.listen(3000,()=>{
     MongoClient.connect(url,mongoOptions,(error,client)=>{
     if(error) 
     throw(error);
 
     let database = client.db(dbname);
-    let collection = database.collection("contests");
+    let collection = database.collection("page1");
     console.log("Connected to`" + dbname + "`!");
     });
 });
@@ -43,7 +43,7 @@ app.get('/',(req,res)=>{
             //confirmPassword: req.body.conpass
         }
         let dbo = db.db("page");
-        dbo.collection("page").insertOne(newData);
+        dbo.collection("page1").insertOne(newData);
     })
     res.redirect("about.html")      // or use res.end()
 })
