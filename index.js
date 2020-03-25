@@ -27,9 +27,9 @@ app.listen(3000,()=>{
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+"/REGISTER.html");
 });
-app.get('/',(req,res)=>{
-    res.render("login",{});
-});
+//app.get('/',(req,res)=>{
+   // res.render("login",{});
+//});
  app.post('/about',(req,res)=>{
      
  MongoClient.connect(url,(err,db)=>{
@@ -39,7 +39,7 @@ app.get('/',(req,res)=>{
         {
             name: req.body.email1,
             username: req.body.username1,
-            password: req.body.password1,
+            password: req.body.password1
             //confirmPassword: req.body.conpass
         }
         let dbo = db.db("page");
