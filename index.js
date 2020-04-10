@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const dbname = "page";
-const url = "mongodb+srv://divyansh:divyansh27@cluster0-tsqj7.mongodb.net/test";
+const url ="mongodb+srv://divyansh:divyansh27@cluster0-gnnsr.mongodb.net/test";
+const bcrypt = require("bcrypt");
+
 const mongoOptions = {useNewUrlParser : true};
 
 const app = express();
@@ -30,16 +32,18 @@ app.get('/',(req,res)=>{
 //app.get('/',(req,res)=>{
    // res.render("login",{});
 //});
- app.post('/about',(req,res)=>{
+ app.post('/signup',(req,res)=>{
      
  MongoClient.connect(url,(err,db)=>{
         if(err)
         throw(err);
+        const SALT_ROUND="12"
+        let hashedPassword=bcrypt.hashSync(req.body.password1,SALT_ROUND)
         let newData =
         {
             name: req.body.email1,
             username: req.body.username1,
-            password: req.body.password1
+            password: hashedPassword
             //confirmPassword: req.body.conpass
         }
         let dbo = db.db("page");
